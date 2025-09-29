@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://4k2ui147lswp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6aclj"]
+size = Vector2(384, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fos0i"]
+size = Vector2(392, 64)
+
+[node name="Mid_Platform" type="StaticBody2D" groups=["Platform"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Polygon" type="Polygon2D" parent="."]
+position = Vector2(60, -320)
+color = Color(0.257924, 0.473387, 0.224543, 1)
+polygon = PackedVector2Array(136, 288, -256, 288, -256, 352, 136, 352)
+
+[node name="Surface" type="CollisionShape2D" parent="."]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_6aclj")
+
+[node name="Actual" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Collider" type="CollisionShape2D" parent="Actual"]
+visible = false
+shape = SubResource("RectangleShape2D_fos0i")

@@ -1,0 +1,151 @@
+[gd_scene load_steps=13 format=3 uid="uid://dh5imp7dvedox"]
+
+[ext_resource type="Script" uid="uid://brximn6hxqnnl" path="res://Scripts/Manager.gd" id="1_fos0i"]
+[ext_resource type="PackedScene" uid="uid://b8imrop8ytuah" path="res://Scenes/Character.tscn" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://bauy1lx83eckx" path="res://Scripts/Camera.gd" id="1_uu6xs"]
+[ext_resource type="Script" uid="uid://ccyiln5rqakw6" path="res://Scripts/Marker.gd" id="3_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://deg581f6wdgta" path="res://Scenes/Map/Platforms/Ground.tscn" id="3_jw32o"]
+[ext_resource type="Script" uid="uid://cn3rp28mte6q8" path="res://Scripts/Autoplay_Anim.gd" id="3_r0du0"]
+[ext_resource type="PackedScene" uid="uid://4k2ui147lswp" path="res://Scenes/Map/Platforms/Mid.tscn" id="4_50glp"]
+[ext_resource type="PackedScene" uid="uid://2yks2r7mroim" path="res://Scenes/Map/Platforms/Small.tscn" id="5_50glp"]
+[ext_resource type="PackedScene" uid="uid://dnhddquj48tqv" path="res://Scenes/Map/Platforms/Wall.tscn" id="6_vy5pj"]
+
+[sub_resource type="Animation" id="Animation_uu6xs"]
+resource_name = "Anim"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(1.5, 1.5), Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_r0du0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cm0pq"]
+_data = {
+&"Anim": SubResource("Animation_uu6xs"),
+&"RESET": SubResource("Animation_r0du0")
+}
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_fos0i")
+
+[node name="Camera" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+script = ExtResource("1_uu6xs")
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Polygon" type="Polygon2D" parent="Map"]
+color = Color(0.262745, 0.745098, 1, 1)
+polygon = PackedVector2Array(-10416, -7680, 16792, -7680, 16800, 7880, -10416, 7880)
+
+[node name="Ground" parent="Map" instance=ExtResource("3_jw32o")]
+position = Vector2(0, 184)
+
+[node name="Mid" parent="Map" instance=ExtResource("4_50glp")]
+position = Vector2(-357, -211)
+
+[node name="Mid2" parent="Map" instance=ExtResource("4_50glp")]
+position = Vector2(364, -357)
+rotation = 0.785398
+
+[node name="Mid3" parent="Map" instance=ExtResource("4_50glp")]
+position = Vector2(87, -402)
+rotation = -0.785398
+
+[node name="Mid4" parent="Map" instance=ExtResource("4_50glp")]
+position = Vector2(-1120, -464)
+
+[node name="Mid5" parent="Map" instance=ExtResource("4_50glp")]
+position = Vector2(848, -64)
+
+[node name="Mid6" parent="Map" instance=ExtResource("4_50glp")]
+position = Vector2(1304, -64)
+
+[node name="Mid7" parent="Map" instance=ExtResource("4_50glp")]
+position = Vector2(1192, -272)
+
+[node name="Small" parent="Map" instance=ExtResource("5_50glp")]
+position = Vector2(-744, -16)
+
+[node name="Small4" parent="Map" instance=ExtResource("5_50glp")]
+position = Vector2(784, -192)
+
+[node name="Small5" parent="Map" instance=ExtResource("5_50glp")]
+position = Vector2(720, -392)
+
+[node name="Small6" parent="Map" instance=ExtResource("5_50glp")]
+position = Vector2(552, -568)
+rotation = -0.523599
+
+[node name="Small3" parent="Map" instance=ExtResource("5_50glp")]
+position = Vector2(-760, -344)
+
+[node name="Small2" parent="Map" instance=ExtResource("5_50glp")]
+position = Vector2(-1168, -160)
+
+[node name="Wall1" parent="Map" instance=ExtResource("6_vy5pj")]
+position = Vector2(-4684, -4692)
+rotation = 1.5708
+
+[node name="Wall2" parent="Map" instance=ExtResource("6_vy5pj")]
+position = Vector2(4684, -4692)
+rotation = -1.5708
+
+[node name="Players" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Char_1" parent="Players" instance=ExtResource("1_glv2v")]
+position = Vector2(-500, 0)
+floor_snap_length = 1.0
+color = Color(1, 0, 0, 1)
+Right = "D"
+Left = "A"
+
+[node name="Char_2" parent="Players" instance=ExtResource("1_glv2v")]
+position = Vector2(500, 0)
+color = Color(0.054902, 0, 1, 1)
+Up = "Up"
+Right = "Right"
+Left = "Left"
+
+[node name="Char_3" parent="Players" instance=ExtResource("1_glv2v")]
+color = Color(0, 1, 0, 1)
+Up = "U"
+Right = "K"
+Left = "H"
+
+[node name="Marker" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+rotation = 0.785398
+color = Color(0.419608, 0, 1, 1)
+polygon = PackedVector2Array(-5.33333, -5.33333, 5.33333, -5.33333, 5.33333, 5.33333, -5.33333, 5.33333)
+script = ExtResource("3_cm0pq")
+
+[node name="Anim" type="AnimationPlayer" parent="Marker"]
+libraries = {
+&"": SubResource("AnimationLibrary_cm0pq")
+}
+speed_scale = 2.0
+script = ExtResource("3_r0du0")

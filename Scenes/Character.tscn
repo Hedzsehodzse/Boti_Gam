@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8imrop8ytuah"]
+
+[ext_resource type="Script" uid="uid://caqsbh8tgq1qg" path="res://Scripts/Character.gd" id="1_oolk3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxg2q"]
+
+[node name="Character" type="CharacterBody2D"]
+scale = Vector2(3, 3)
+collision_layer = 2
+floor_stop_on_slope = false
+floor_max_angle = 1.39626
+floor_snap_length = 5.0
+script = ExtResource("1_oolk3")
+Up = "W"
+Right = "R"
+Left = "L"
+
+[node name="Poly" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(10, -10, 10, 10, -10, 10, -10, -10)
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_rxg2q")
+
+[node name="Area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 7
+
+[node name="Collider" type="CollisionShape2D" parent="Area"]
+position = Vector2(-4.76837e-07, 0)
+scale = Vector2(1.1, 1.1)
+shape = SubResource("RectangleShape2D_rxg2q")
+
+[connection signal="area_entered" from="Area" to="." method="Area_Entered"]
+[connection signal="body_entered" from="Area" to="." method="Body_Entered"]
